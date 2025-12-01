@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>ciemno - jasno – odsłuch</title>
+  <title>karta – odsłuch</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <style>
     :root {
@@ -20,71 +20,54 @@
       color: #f5f5f5;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
         sans-serif;
-      display: flex;
       min-height: 100vh;
+      display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .player-wrapper {
       width: 100%;
-      max-width: 520px;
+      max-width: 520px;           /* wygodne na telefonie i ok na desktopie */
+      text-align: center;
     }
 
     h1 {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 500;
-      margin: 0 0 6px 0;
+      margin: 0 0 10px 0;
     }
 
     p {
       font-size: 14px;
-      margin: 0 0 12px 0;
+      margin: 0 0 18px 0;
       line-height: 1.4;
       color: #cccccc;
+    }
+
+    /* duży, czytelny natywny player audio */
+    audio {
+      width: 100%;
+      height: 56px;               /* część przeglądarek to respektuje, część nie – ale nie szkodzi */
+      outline: none;
+      border-radius: 12px;
+      background: #111111;
+      box-shadow: 0 0 0 1px #333333;
     }
   </style>
 </head>
 <body>
   <div class="player-wrapper">
-    <h1>ciemno - jasno</h1>
-    <p>Dotknij ▶ w playerze, aby odsłuchać nagranie.</p>
+    <h1>karta</h1>
+    <p>Dotknij ▶ aby odsłuchać nagranie.</p>
 
-    <iframe
-      width="100%"
-      height="300"
-      scrolling="no"
-      frameborder="no"
-      allow="autoplay"
-      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/soundcloud%3Atracks%3A2222073992%3Fsecret_token%3Ds-sMUJnLQkfFp&color=%2300cc11&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"
-    ></iframe>
-
-    <div style="
-      font-size: 10px;
-      color: #cccccc;
-      line-break: anywhere;
-      word-break: normal;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,
-        Garuda,Verdana,Tahoma,sans-serif;
-      font-weight: 100;
-      ">
-      <a
-        href="https://soundcloud.com/bartlomiejhajkiewicz"
-        title="bartłomiej hajkiewicz"
-        target="_blank"
-        style="color: #cccccc; text-decoration: none;"
-      >bartłomiej hajkiewicz</a>
-      ·
-      <a
-        href="https://soundcloud.com/bartlomiejhajkiewicz/ciemno-jasno-1/s-sMUJnLQkfFp"
-        title="ciemno - jasno"
-        target="_blank"
-        style="color: #cccccc; text-decoration: none;"
-      >ciemno - jasno</a>
-    </div>
+    <!-- plik audio musi leżeć obok tego pliku HTML i nazywać się "karta.mp3" -->
+    <audio
+      controls
+      preload="metadata"
+      src="wiatr.wav">
+      Twoja przeglądarka nie obsługuje elementu audio.
+    </audio>
   </div>
 </body>
 </html>

@@ -9,45 +9,63 @@
 
     * { box-sizing: border-box; }
 
-    body {
+    html, body {
       margin: 0;
-      padding: 16px;
+      padding: 0;
+      height: 100%;
+      overflow: hidden; /* całkowite wyłączenie przewijania */
+    }
+
+    body {
       background: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: #111111;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
     }
 
     .page {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
       width: 100%;
-      max-width: 420px;      /* wygodna szerokość na mobile */
+      max-width: 420px;
+      padding: 0 16px;
+      box-sizing: border-box;
+    }
+
+    header, .instruction {
+      padding-top: 16px;
+      padding-bottom: 12px;
+    }
+
+    header {
+      flex-shrink: 0;
     }
 
     .title {
-      font-size: 16px;
+      font-size: 14px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin: 0 0 8px 0;
+      margin: 0 0 4px 0;
       color: #666666;
     }
 
     .track-name {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 500;
-      margin: 0 0 20px 0;
+      margin: 0;
     }
 
     .instruction {
-      font-size: 15px;
-      line-height: 1.5;
-      margin: 0 0 24px 0;
+      font-size: 14px;
+      line-height: 1.4;
+      flex-shrink: 0;
     }
 
     .instruction p {
-      margin: 0 0 10px 0;
+      margin: 0 0 6px 0;
     }
 
     .instruction p:last-child {
@@ -57,22 +75,29 @@
     .hint {
       font-size: 13px;
       color: #888888;
-      margin: 12px 0 0 0;
+      margin-top: 8px;
     }
 
-    /* prostokątny kadr przycinający dół playera */
+    .player {
+      flex-grow: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding-bottom: 12px;
+    }
+
     .bc-crop {
       width: 100%;
-      max-width: 360px;   /* szerokość pod mobile */
-      height: 360px;      /* widoczna wysokość – cover + play, bez napisów */
-      overflow: hidden;   /* obcina białą część z napisami pod okładką */
-      margin: 0 auto;
+      max-width: 360px;
+      height: 320px; /* dokładna wysokość dopasowana do zmieszczenia */
+      overflow: hidden;
+      flex-shrink: 0;
     }
 
     .bc-player {
       border: 0;
       width: 100%;
-      height: 470px;      /* pełna wysokość embedu Bandcamp */
+      height: 470px; /* pełna wysokość iframe Bandcamp */
     }
   </style>
 </head>
@@ -111,3 +136,4 @@
   </main>
 </body>
 </html>
+

@@ -2,54 +2,48 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title></title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>audialne karty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
   <style>
-    :root { color-scheme: light; }
-
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden; /* całkowite wyłączenie przewijania */
+      overflow: hidden;
+      font-family: system-ui, sans-serif;
+      color: #111;
+      background: #fff;
     }
 
     body {
-      background: #ffffff;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: #111111;
       display: flex;
       justify-content: center;
-      align-items: stretch;
+      align-items: center;
     }
 
     .page {
-      display: flex;
-      flex-direction: column;
       height: 100vh;
       width: 100%;
       max-width: 420px;
-      padding: 0 16px;
-      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
     }
 
     header, .instruction {
-      padding-top: 16px;
-      padding-bottom: 12px;
-    }
-
-    header {
+      padding: 16px;
       flex-shrink: 0;
     }
 
     .title {
       font-size: 14px;
-      letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: #666;
       margin: 0 0 4px 0;
-      color: #666666;
+      letter-spacing: 0.08em;
     }
 
     .track-name {
@@ -61,20 +55,15 @@
     .instruction {
       font-size: 14px;
       line-height: 1.4;
-      flex-shrink: 0;
     }
 
     .instruction p {
       margin: 0 0 6px 0;
     }
 
-    .instruction p:last-child {
-      margin-bottom: 0;
-    }
-
     .hint {
       font-size: 13px;
-      color: #888888;
+      color: #888;
       margin-top: 8px;
     }
 
@@ -83,21 +72,21 @@
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      padding-bottom: 12px;
+      padding: 0 16px 16px;
     }
 
     .bc-crop {
       width: 100%;
       max-width: 360px;
-      height: 320px; /* dokładna wysokość dopasowana do zmieszczenia */
+      aspect-ratio: 1 / 1; /* zamiast height: 320px */
       overflow: hidden;
-      flex-shrink: 0;
     }
 
     .bc-player {
       border: 0;
       width: 100%;
-      height: 470px; /* pełna wysokość iframe Bandcamp */
+      height: 470px; /* Bandcamp player wysokość – musi być większa niż kontener */
+      transform: translateY(-150px); /* dostosuj do przycięcia dolnej części */
     }
   </style>
 </head>
@@ -136,4 +125,5 @@
   </main>
 </body>
 </html>
+
 

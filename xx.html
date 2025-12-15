@@ -3,8 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>audialne karty</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     * { box-sizing: border-box; }
 
@@ -15,38 +14,34 @@
       background: #fff;
       color: #111;
 
-      /* kluczowe: NIE blokuj przewijania na mobile */
+      /* KLUCZ: pozwól stronie się przewijać */
       overflow: auto;
     }
 
-    body{
-      /* kluczowe: bez flex-centrowania (na iOS często ucina górę) */
+    body {
+      /* KLUCZ: bez flex-centrowania w pionie */
       display: block;
-
-      /* safe-area dla iPhone notch + paski */
-      padding:
-        calc(16px + env(safe-area-inset-top))
-        calc(16px + env(safe-area-inset-right))
-        calc(16px + env(safe-area-inset-bottom))
-        calc(16px + env(safe-area-inset-left));
     }
 
-    .page{
+    .page {
       width: 100%;
       max-width: 420px;
-
-      /* stabilna wysokość viewportu na iOS */
-      min-height: 100svh;
+      margin: 0 auto;      /* centrowanie poziome */
+      padding: 16px;
 
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
       align-items: stretch;
+      gap: 0;
+
+      /* KLUCZ: nie blokuj wysokością viewportu */
+      height: auto;
+      min-height: 0;
     }
 
     header { margin-bottom: 8px; }
 
-    .title{
+    .title {
       font-size: 14px;
       text-transform: uppercase;
       color: #666;
@@ -54,60 +49,44 @@
       letter-spacing: 0.08em;
     }
 
-    .track-name{
+    .track-name {
       font-size: 18px;
       font-weight: 500;
       margin: 0;
     }
 
-    .instruction{
+    .instruction {
       font-size: 14px;
       line-height: 1.4;
       margin-top: 8px;
       margin-bottom: 16px;
     }
 
-    .instruction p{ margin: 0 0 6px 0; }
+    .instruction p { margin: 0 0 6px 0; }
 
-    .hint{
+    .hint {
       font-size: 13px;
       color: #888;
       margin-top: 6px;
     }
 
-    .player{
-      margin-top: auto;
-      display: flex;
-      justify-content: center;
-      padding-bottom: calc(8px + env(safe-area-inset-bottom));
+    .player {
+      /* bez "margin-top:auto" – to niepotrzebne i czasem miesza na mobile */
+      margin-top: 0;
+      display: block;
     }
 
-    /* === Bandcamp: tylko przycisk ▶ ===
-       Robimy "okno" (crop) i przesuwamy iframe w górę,
-       żeby schować dolne elementy (napisy/linki).
-       Uwaga: jeśli Bandcamp zmieni layout, trzeba skorygować wartości.
-    */
-    .bc-crop{
-      width: 100%;
-      max-width: 360px;
-
-      /* wysokość tylko na sam pasek z ▶ */
-      height: 70px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    .bc-player{
+    /* Bandcamp: pełny widok okładki + napisy */
+    .bc-player {
       border: 0;
       width: 100%;
+      height: 470px; /* pełny embed (okładka + tekst + kontrolki) */
+      display: block;
+    }
 
-      /* duże, bo i tak ucinamy */
-      height: 470px;
-
-      /* przesunięcie w górę, żeby zostało tylko ▶ */
-      position: absolute;
-      top: -240px;   /* <- jeśli nadal widać napisy, zwiększ (np. -260px) */
-      left: 0;
+    /* Na bardzo małych ekranach można dać trochę mniej, ale nadal pełny widok */
+    @media (max-width: 380px) {
+      .bc-player { height: 520px; } /* często lepiej dać WIĘCEJ, żeby nic nie ucinało */
     }
   </style>
 </head>
@@ -130,13 +109,13 @@
     </section>
 
     <section class="player">
-      <div class="bc-crop">
-        <iframe
-          class="bc-player"
-          src="https://bandcamp.com/EmbeddedPlayer/track=200305948/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/"
-          seamless
-        ></iframe>
-      </div>
+      <iframe
+        class="bc-player"
+        src="https://bandcamp.com/EmbeddedPlayer/track=200305948/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/"
+        seamless
+      >
+        <a href="https://hajkiewicz.bandcamp.com/track/tworz-sie">tworzę się by Hajkiewicz</a>
+      </iframe>
     </section>
   </main>
 </body>

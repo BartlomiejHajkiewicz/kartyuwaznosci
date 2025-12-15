@@ -2,50 +2,121 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8" />
-  <title>karty / galeria tworzę się – utwór 2</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <style>
-    :root { color-scheme: light; }
+  <title>audialne karty</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <style>
     * { box-sizing: border-box; }
 
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      font-family: system-ui, sans-serif;
+      background: #fff;
+      color: #111;
+      overflow: auto;
+    }
+
+    body { display: block; }
+
+    .page {
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
       padding: 16px;
-      background: #ffffff;
-      min-height: 100vh;
+
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    header { margin-bottom: 8px; }
+
+    .title {
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #666;
+      margin: 0 0 4px 0;
+      letter-spacing: 0.08em;
+    }
+
+    .track-name {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .instruction {
+      font-size: 14px;
+      line-height: 1.4;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+
+    .instruction p { margin: 0 0 6px 0; }
+
+    .hint {
+      font-size: 13px;
+      color: #888;
+      margin-top: 6px;
+    }
+
+    .player {
+      display: flex;
       justify-content: center;
     }
 
-    /* prostokątny kadr przycinający dół playera */
+    /* === Bandcamp: skalowanie + ucięcie dołu === */
     .bc-crop {
       width: 100%;
-      max-width: 360px;   /* szerokość pod mobile */
-      height: 360px;      /* widoczna wysokość – cover + play, bez napisów */
-      overflow: hidden;   /* obcina białą część z napisami pod okładką */
-      margin: 0 auto;
+      max-width: 360px;
+      height: 290px;
+      overflow: hidden;
+    }
+
+    .bc-scale {
+      width: 100%;
+      transform: scale(0.82);
+      transform-origin: top center;
     }
 
     .bc-player {
       border: 0;
       width: 100%;
-      height: 470px;      /* pełna wysokość embedu Bandcamp */
+      height: 470px;
+      display: block;
     }
   </style>
 </head>
+
 <body>
-  <div class="bc-crop">
-    <iframe
-      class="bc-player"
-      src="https://bandcamp.com/EmbeddedPlayer/track=1774814668/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/""
-      seamless
-    >
-      <a href="https://hajkiewicz.bandcamp.com/album/karty-galeria-tworz-si">
-        karty / galeria tworzę się by Hajkiewicz
-      </a>
-    </iframe>
-  </div>
+  <main class="page">
+    <header>
+      <p class="title">instrukcja odsłuchu</p>
+      <h1 class="track-name">audialne karty uważności / tworzę się</h1>
+    </header>
+
+    <section class="instruction">
+      <p>Włącz nagranie i zamknij oczy.</p>
+      <p>Wyobraź sobie, że znajdujesz się wewnątrz dźwięku, który słyszysz.</p>
+      <p>Określ, jaka panuje tam atmosfera: czy dźwięk jest gęsty, przejrzysty, spokojny, chaotyczny, a może zupełnie inny?</p>
+      <p>Wybierz jedną lub kilka jakości dźwięku, które najlepiej oddają Twoje odczucie. Opisz te jakości w kilku zdaniach.</p>
+
+      <p class="hint">Przeczytaj instrukcję, a potem dotknij ▶</p>
+    </section>
+
+    <section class="player">
+      <div class="bc-crop">
+        <div class="bc-scale">
+          <iframe
+            class="bc-player"
+            src="https://bandcamp.com/EmbeddedPlayer/track=1774814668/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/"
+            seamless
+            scrolling="no"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

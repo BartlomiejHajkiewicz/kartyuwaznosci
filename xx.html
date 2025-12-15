@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>audialne karty</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <style>
     * { box-sizing: border-box; }
 
@@ -13,30 +14,20 @@
       font-family: system-ui, sans-serif;
       background: #fff;
       color: #111;
-
-      /* KLUCZ: pozwól stronie się przewijać */
-      overflow: auto;
+      overflow: auto; /* nie blokuj przewijania na mobile */
     }
 
-    body {
-      /* KLUCZ: bez flex-centrowania w pionie */
-      display: block;
-    }
+    body { display: block; }
 
     .page {
       width: 100%;
       max-width: 420px;
-      margin: 0 auto;      /* centrowanie poziome */
+      margin: 0 auto;
       padding: 16px;
 
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      gap: 0;
-
-      /* KLUCZ: nie blokuj wysokością viewportu */
-      height: auto;
-      min-height: 0;
     }
 
     header { margin-bottom: 8px; }
@@ -71,22 +62,32 @@
     }
 
     .player {
-      /* bez "margin-top:auto" – to niepotrzebne i czasem miesza na mobile */
-      margin-top: 0;
-      display: block;
+      display: flex;
+      justify-content: center;
     }
 
-    /* Bandcamp: pełny widok okładki + napisy */
+    /* === Bandcamp: skalowanie + ucięcie dołu === */
+
+    /* okno (crop) */
+    .bc-crop {
+      width: 100%;
+      max-width: 360px;
+      height: 330px;      /* ile widać (mniej = bardziej ucięty dół) */
+      overflow: hidden;
+    }
+
+    /* wrapper do skali */
+    .bc-scale {
+      width: 100%;
+      transform: scale(0.92);          /* rozmiar playera (np. 0.90–0.96) */
+      transform-origin: top center;
+    }
+
     .bc-player {
       border: 0;
       width: 100%;
-      height: 470px; /* pełny embed (okładka + tekst + kontrolki) */
+      height: 470px;      /* pełny „large”, my i tak ucinamy tylko dół */
       display: block;
-    }
-
-    /* Na bardzo małych ekranach można dać trochę mniej, ale nadal pełny widok */
-    @media (max-width: 380px) {
-      .bc-player { height: 520px; } /* często lepiej dać WIĘCEJ, żeby nic nie ucinało */
     }
   </style>
 </head>
@@ -104,18 +105,20 @@
       <p>Czy jest okrągły, kanciasty, bardzo długi, malutki jak kropka, a może zupełnie inny?</p>
       <p>Gdy dźwięk się zmienia, czy kształt też się zmienia?</p>
       <p>Narysuj jego zmianę w trzech krokach.</p>
-
       <p class="hint">Przeczytaj instrukcję, a potem dotknij ▶</p>
     </section>
 
     <section class="player">
-      <iframe
-        class="bc-player"
-        src="https://bandcamp.com/EmbeddedPlayer/track=200305948/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/"
-        seamless
-      >
-        <a href="https://hajkiewicz.bandcamp.com/track/tworz-sie">tworzę się by Hajkiewicz</a>
-      </iframe>
+      <div class="bc-crop">
+        <div class="bc-scale">
+          <iframe
+            class="bc-player"
+            src="https://bandcamp.com/EmbeddedPlayer/track=200305948/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/"
+            seamless
+            scrolling="no"
+          ></iframe>
+        </div>
+      </div>
     </section>
   </main>
 </body>

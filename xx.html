@@ -79,14 +79,14 @@
     .bc-crop {
       width: 100%;
       max-width: 360px;
-      height: 360px; /* wysokość okładki */
       overflow: hidden;
+      /* Wysokość zostanie ustawiona dynamicznie */
     }
 
     .bc-player {
       border: 0;
       width: 100%;
-      height: 470px; /* pełna wysokość Bandcamp playera */
+      height: 470px; /* pełna wysokość playera Bandcamp */
     }
   </style>
 </head>
@@ -110,7 +110,7 @@
     </section>
 
     <section class="player">
-      <div class="bc-crop">
+      <div class="bc-crop" id="bc-crop">
         <iframe
           class="bc-player"
           src="https://bandcamp.com/EmbeddedPlayer/track=200305948/size=large/bgcol=ffffff/linkcol=0687f5/transparent=true/"
@@ -123,5 +123,29 @@
       </div>
     </section>
   </main>
+
+  <script>
+    function resizeCrop() {
+      const crop = document.getElementById('bc-crop');
+      const page = document.querySelector('.page');
+
+      const headerHeight = document.querySelector('header').offsetHeight;
+      const instructionHeight = document.querySelector('.instruction').offsetHeight;
+      const bottomPadding = 12;
+
+      const totalUsed = headerHeight + instructionHeight + bottomPadding + 16; // +16 for layout breathing
+      const vh = window.innerHeight;
+
+      const availableHeight = vh - totalUsed;
+
+      crop.style.height = availableHeight + 'px';
+    }
+
+    // Initial call
+    resizeCrop();
+
+    // Recalculate on resize / orientation change
+    window.addEventListener('resize', resizeCrop);
+  </script>
 </body>
 </html>
